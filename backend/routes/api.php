@@ -27,6 +27,11 @@ Route::get('/test', function () {
     ]);
 });
 
+Route::get('/phpinfo', function () {
+    phpinfo();
+    return; // ไม่ต้อง return response เพราะ phpinfo() จะ output html ออกมาเอง
+});
+
 //auth routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
