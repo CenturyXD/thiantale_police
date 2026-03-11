@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\Admin\ContentController as AdminContentController;
 
 
 /*
@@ -29,10 +30,25 @@ Route::get('/test', function () {
 
 Route::get('/phpinfo', function () {
     phpinfo();
-    return; // ไม่ต้อง return response เพราะ phpinfo() จะ output html ออกมาเอง
+    return;
 });
 
 //auth routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+//public routes
+Route::get('contents', [AdminContentController::class, 'index']);
+
+//protected routes (ต้อง login ก่อน)
+Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/test', function () {
+        return response()->json(['message' => 'Admin test route']);
+    });
+
+    // Content Management
+    Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
+    Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
+    Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
+    Route::apiResource('contents', AdminContentController::class);
+});

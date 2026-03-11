@@ -41,12 +41,12 @@ class AuthController extends Controller
             ], 401);
         }
 
-        // Generate token or perform login logic here
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'User logged in successfully',
             'user' => $user,
+            'token' => $token,
         ], 200);
     }
-
 }
