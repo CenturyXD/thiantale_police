@@ -38,7 +38,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 //public routes
-Route::get('contents', [AdminContentController::class, 'index']);
+
+// Route::get('contents', [AdminContentController::class, 'index']);
+Route::apiResource('contents', AdminContentController::class);
 
 //protected routes (ต้อง login ก่อน)
 Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
