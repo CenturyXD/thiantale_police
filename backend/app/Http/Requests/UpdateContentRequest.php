@@ -36,7 +36,8 @@ class UpdateContentRequest extends FormRequest
             'remove_image' => 'nullable|boolean',
             'remove_file' => 'nullable|boolean',
             'body_image_ids' => 'nullable|array',
-            'body_image_ids.*' => 'integer|exists:content_images,id'
+            'body_image_ids.*' => 'integer|exists:content_images,id',
+            'slot' => 'nullable|string|max:255'
         ];
     }
 

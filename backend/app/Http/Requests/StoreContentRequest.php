@@ -34,7 +34,8 @@ class StoreContentRequest extends FormRequest
             'publish_date' => 'nullable|date',
             'order' => 'nullable|integer|min:0',
             'body_image_ids' => 'nullable|array',
-            'body_image_ids.*' => 'integer|exists:content_images,id'
+            'body_image_ids.*' => 'integer|exists:content_images,id',
+            'slot' => 'nullable|string|max:255'
         ];
     }
 
