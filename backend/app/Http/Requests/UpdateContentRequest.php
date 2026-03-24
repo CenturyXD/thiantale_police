@@ -25,7 +25,8 @@ class UpdateContentRequest extends FormRequest
         return [
             'title' => 'sometimes|required|string|max:255',
             'content' => 'nullable|string',
-            'section' => 'sometimes|required|in:' . implode(',', array_keys(Content::SECTIONS)),
+            // 'section' => 'sometimes|required|in:' . implode(',', array_keys(Content::SECTIONS)),
+            'section' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'body_images' => 'nullable|array',
             'body_images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:4096',
