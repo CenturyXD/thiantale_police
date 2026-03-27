@@ -26,7 +26,8 @@ class Content extends Model
         'author_id',
         'view_count',
         'order',
-        'slot'
+        'slot',
+        'url'
     ];
 
     protected $casts = [
