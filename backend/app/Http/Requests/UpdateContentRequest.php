@@ -38,7 +38,8 @@ class UpdateContentRequest extends FormRequest
             'remove_file' => 'nullable|boolean',
             'body_image_ids' => 'nullable|array',
             'body_image_ids.*' => 'integer|exists:content_images,id',
-            'slot' => 'nullable|string|max:255'
+            'slot' => 'nullable|string|max:255',
+            'link' => 'nullable|url|max:255'
         ];
     }
 
@@ -71,7 +72,9 @@ class UpdateContentRequest extends FormRequest
             'order.min' => 'ลำดับต้องมากกว่าหรือเท่ากับ 0',
             'body_image_ids.array' => 'รายการรูปในเนื้อหาต้องเป็น array',
             'body_image_ids.*.integer' => 'รหัสรูปในเนื้อหาต้องเป็นตัวเลข',
-            'body_image_ids.*.exists' => 'ไม่พบรูปในเนื้อหาบางรายการ'
+            'body_image_ids.*.exists' => 'ไม่พบรูปในเนื้อหาบางรายการ',
+            'slot'=>'ช่องแสดงผลต้องไม่เกิน 255 ตัวอักษร',
+            'link' => 'ลิงก์ต้องเป็น URL ที่ถูกต้อง',
         ];
     }
 
