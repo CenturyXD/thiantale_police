@@ -22,6 +22,10 @@ class ContentController extends Controller
             $query->where('section', $request->section);
         }
 
+        if( $request->has('slot')) {
+            $query->where('slot', $request->slot);
+        }
+
         if ($request->has('status')) {
             $query->where('status', $request->status);
         }
