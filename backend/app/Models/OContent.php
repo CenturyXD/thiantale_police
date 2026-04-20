@@ -17,7 +17,8 @@ class OContent extends Model
         'author_id',
         'view_count',
         'order',
-        'status'
+        'status',
+        'url'
     ];
 
     protected $casts = [
