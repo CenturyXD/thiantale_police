@@ -39,7 +39,8 @@ class UpdateContentRequest extends FormRequest
             'body_image_ids' => 'nullable|array',
             'body_image_ids.*' => 'integer|exists:content_images,id',
             'slot' => 'nullable|string|max:255',
-            'url' => 'nullable|string|max:255'
+            'url' => 'nullable|string|max:255',
+            'display_on' => 'nullable|string|max:255'
         ];
     }
 

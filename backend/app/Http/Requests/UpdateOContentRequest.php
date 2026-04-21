@@ -33,6 +33,7 @@ class UpdateOContentRequest extends FormRequest
             'order' => 'nullable|integer|min:0',
             'remove_image' => 'nullable|boolean',
             'remove_file' => 'nullable|boolean',
+            'display_on' => 'nullable|string|max:255',
         ];
     }
 

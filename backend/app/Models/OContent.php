@@ -18,7 +18,8 @@ class OContent extends Model
         'view_count',
         'order',
         'status',
-        'url'
+        'url',
+        'display_on',
     ];
 
     protected $casts = [

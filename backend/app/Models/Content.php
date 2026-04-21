@@ -27,7 +27,8 @@ class Content extends Model
         'view_count',
         'order',
         'slot',
-        'url'
+        'url',
+        'display_on',
     ];
 
     protected $casts = [
