@@ -27,7 +27,7 @@ class StoreOContentRequest extends FormRequest
             'content' => 'nullable|string',
             'section' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:10240',
+            'file' => 'nullable|file|max:10240',
             'status' => 'required|in:draft,published',
             'publish_date' => 'nullable|date',
             'order' => 'nullable|integer|min:0',

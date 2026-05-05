@@ -30,7 +30,7 @@ class StoreContentRequest extends FormRequest
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             'body_images' => 'nullable|array',
             'body_images.*' => 'image|mimes:jpeg,png,jpg,gif,webp',
-            'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx',
+            'file' => 'nullable|file',
             'status' => 'required|in:draft,published',
             'publish_date' => 'nullable|date',
             'order' => 'nullable|integer|min:0',
