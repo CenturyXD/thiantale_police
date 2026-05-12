@@ -39,7 +39,7 @@ class ContentController extends Controller
         }
 
         $sortBy = $request->get('sort_by', 'created_at');
-        $sortOrder = $request->get('sort_order', 'desc');
+        $sortOrder = $request->get('sort_order', 'ASC');
         $query->orderBy($sortBy, $sortOrder);
 
         $perPage = $request->get('per_page', 15);
