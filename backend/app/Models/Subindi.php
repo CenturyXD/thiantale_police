@@ -18,4 +18,9 @@ class Subindi extends Model
         return $this->belongsTo(Indi::class);
     }
 
+    public function topics()
+    {
+        return $this->hasMany(Topic::class, 'subindi_id', 'id');
+    }
+
 }

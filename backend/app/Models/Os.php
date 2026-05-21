@@ -18,4 +18,9 @@ class Os extends Model
     {
         return $this->belongsTo(Topic::class, 'topic_id');
     }
+
+    public function oContents()
+    {
+        return $this->hasMany(OContent::class);
+    }
 }

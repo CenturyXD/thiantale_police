@@ -60,4 +60,15 @@ class OsController extends Controller
             'message' => 'ลบหัวข้อย่อย os สำเร็จ',
         ]);
     }
+    /**
+     * แสดงข้อมูลทั้งหมดพร้อม relations
+     */
+    public function allWithRelations()
+    {
+        $os = Os::with(['indi', 'subindi', 'topics', 'oContents'])->get();
+        return response()->json([
+            'success' => true,
+            'data' => $os
+        ]);
+    }
 }

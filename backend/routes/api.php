@@ -44,6 +44,8 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 //public routes
+Route::get('public/indis', [IndiController::class, 'index']); // ดูรายการ indi แบบ public
+Route::get('public/indis/{indi}', [IndiController::class, 'show']); // ดูรายละเอียด indi แบบ public
 
 // Route::get('contents', [AdminContentController::class, 'index']);
 Route::apiResource('contents', AdminContentController::class);

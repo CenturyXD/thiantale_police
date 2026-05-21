@@ -60,4 +60,15 @@ class SubindiController extends Controller
             'message' => 'ลบตัวชี้วัดย่อยสำเร็จ',
         ]);
     }
+    /**
+     * แสดงข้อมูลทั้งหมดพร้อม relations
+     */
+    public function allWithRelations()
+    {
+        $subindis = Subindi::with(['indi', 'topics', 'os', 'oContents'])->get();
+        return response()->json([
+            'success' => true,
+            'data' => $subindis
+        ]);
+    }
 }

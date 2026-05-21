@@ -14,7 +14,9 @@ class IndiController extends Controller
      */
     public function index()
     {
-        $indis = Indi::with('subindis')->latest()->get();
+        $indis = Indi::with([
+            'subindis.topics.os.oContents'
+        ])->latest()->get();
         return response()->json($indis);
     }
 
@@ -33,7 +35,7 @@ class IndiController extends Controller
      */
     public function show(Indi $indi)
     {
-        return response()->json($indi->load('subindis'));
+        return response()->json($indi->load('subindis.topics.os.oContents'));
     }
 
     /**
@@ -57,6 +59,18 @@ class IndiController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'ลบตัวชี้วัดสำเร็จ',
+        ]);
+    }
+
+    /**
+     * แสดงข้อมูลทั้งหมดพร้อม relations
+     */
+    public function allWithRelations()
+    {
+        $indis = Indi::with(['subindis', 'topics', 'os', 'oContents'])->get();
+        return response()->json([
+            'success' => true,
+            'data' => $indis
         ]);
     }
 }

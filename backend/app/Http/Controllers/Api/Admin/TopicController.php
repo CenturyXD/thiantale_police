@@ -60,4 +60,15 @@ class TopicController extends Controller
             'message' => 'ลบหัวข้อสำเร็จ',
         ]);
     }
+    /**
+     * แสดงข้อมูลทั้งหมดพร้อม relations
+     */
+    public function allWithRelations()
+    {
+        $topics = Topic::with(['indi', 'subindi', 'os', 'oContents'])->get();
+        return response()->json([
+            'success' => true,
+            'data' => $topics
+        ]);
+    }
 }

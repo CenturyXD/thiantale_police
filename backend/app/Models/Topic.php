@@ -17,4 +17,9 @@ class Topic extends Model
     {
         return $this->belongsTo(Subindi::class);
     }
+
+    public function os()
+    {
+        return $this->hasMany(Os::class);
+    }
 }
