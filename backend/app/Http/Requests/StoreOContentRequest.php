@@ -32,6 +32,7 @@ class StoreOContentRequest extends FormRequest
             'publish_date' => 'nullable|date',
             'order' => 'nullable|integer|min:0',
             'display_on' => 'nullable|string|max:255',
+            'url' => 'nullable|string|max:255'
         ];
     }
 
