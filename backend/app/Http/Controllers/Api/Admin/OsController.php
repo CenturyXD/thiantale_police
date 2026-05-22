@@ -82,7 +82,7 @@ class OsController extends Controller
         ]);
 
         $os_id = request()->input('Os_id');
-        $os = Os::with('topic')->where('id', $os_id)->latest()->get();
+        $os = Os::with('topic')->where('topic_id', $os_id)->latest()->get();
         return response()->json($os);
     }
 
