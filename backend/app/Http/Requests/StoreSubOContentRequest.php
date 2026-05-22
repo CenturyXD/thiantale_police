@@ -33,6 +33,7 @@ class StoreSubOContentRequest extends FormRequest
             'publish_date' => 'nullable|date',
             'order' => 'nullable|integer|min:0',
             'author_id' => 'nullable|exists:users,id',
+            'url' => 'nullable|string|max:255',
         ];
     }
 }
