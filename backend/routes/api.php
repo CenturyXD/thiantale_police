@@ -50,20 +50,12 @@ Route::get('public/indis/{indi}', [IndiController::class, 'show']); // ดูร
 // Route::get('contents', [AdminContentController::class, 'index']);
 Route::apiResource('contents', AdminContentController::class);
 
-Route::get('indis', [IndiController::class, 'index']);
-Route::get('indis/{id}', [IndiController::class, 'show']);
+Route::apiResource('indis', IndiController::class);
+Route::apiResource('subindis', SubindiController::class);
+Route::apiResource('topics', TopicController::class);
+Route::apiResource('os', OsController::class);
+Route::apiResource('o-contents', OContentController::class);
 
-Route::get('subindis', [SubindiController::class, 'index']);
-Route::get('subindis/{id}', [SubindiController::class, 'show']);
-
-Route::get('topics', [TopicController::class, 'index']);
-Route::get('topics/{id}', [TopicController::class, 'show']);
-
-Route::get('os', [OsController::class, 'index']);
-Route::get('os/{id}', [OsController::class, 'show']);
-
-Route::get('o-contents', [OContentController::class, 'index']);
-Route::get('o-contents/{id}', [OContentController::class, 'show']);
 
 
 //protected routes (ต้อง login ก่อน)
