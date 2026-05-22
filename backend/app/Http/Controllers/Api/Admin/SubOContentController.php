@@ -28,6 +28,22 @@ class SubOContentController extends Controller
         //
         $data = $request->validated();
         $data['author_id'] = auth()->id();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('contents/images'), $imageName);
+            $data['image'] = 'contents/images/' . $imageName;
+        }
+
+        // อัพโหลดไฟล์ไปที่ public/contents/files
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('contents/files'), $fileName);
+            $data['file_url'] = 'contents/files/' . $fileName;
+        }
+        
         $subOContent = SubOContent::create($data);
         return response()->json($subOContent->load(['oContent.os.topic.subIndi']), 201);
     }
