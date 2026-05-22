@@ -14,9 +14,16 @@ class IndiController extends Controller
      */
     public function index()
     {
-        $indis = Indi::with([
+        $query = Indi::with([
             'subindis.topics.os.oContents'
-        ])->latest()->get();
+        ]);
+
+        // filter by year if provided
+        if (request()->has('year')) {
+            $query->where('year', request('year'));
+        }
+
+        $indis = $query->latest()->get();
         return response()->json($indis);
     }
 

@@ -57,16 +57,20 @@ class ContentController extends Controller
         $data = $request->validated();
         $data['author_id'] = auth()->id();
 
-        // อัพโหลดรูปภาพ
+        // อัพโหลดรูปภาพไปที่ public/contents/images
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('contents/images', 'public');
-            $data['image'] = $imagePath;
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('contents/images'), $imageName);
+            $data['image'] = 'contents/images/' . $imageName;
         }
 
-        // อัพโหลดไฟล์
+        // อัพโหลดไฟล์ไปที่ public/contents/files
         if ($request->hasFile('file')) {
-            $filePath = $request->file('file')->store('contents/files', 'public');
-            $data['file_url'] = $filePath;
+            $file = $request->file('file');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('contents/files'), $fileName);
+            $data['file_url'] = 'contents/files/' . $fileName;
         }
 
         $content = Content::create($data);
@@ -115,15 +119,22 @@ class ContentController extends Controller
 
         $data = $request->validated();
 
+
         // ลบรูปภาพถ้าได้รับคำสั่ง
         if ($request->boolean('remove_image') && $content->image) {
-            Storage::disk('public')->delete($content->image);
+            $oldImagePath = public_path($content->image);
+            if (file_exists($oldImagePath)) {
+                @unlink($oldImagePath);
+            }
             $data['image'] = null;
         }
 
         // ลบไฟล์ถ้าได้รับคำสั่ง
         if ($request->boolean('remove_file') && $content->file_url) {
-            Storage::disk('public')->delete($content->file_url);
+            $oldFilePath = public_path($content->file_url);
+            if (file_exists($oldFilePath)) {
+                @unlink($oldFilePath);
+            }
             $data['file_url'] = null;
         }
 
@@ -131,20 +142,30 @@ class ContentController extends Controller
         if ($request->hasFile('image')) {
             // ลบรูปเก่า
             if ($content->image) {
-                Storage::disk('public')->delete($content->image);
+                $oldImagePath = public_path($content->image);
+                if (file_exists($oldImagePath)) {
+                    @unlink($oldImagePath);
+                }
             }
-            $imagePath = $request->file('image')->store('contents/images', 'public');
-            $data['image'] = $imagePath;
+            $image = $request->file('image');
+            $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('contents/images'), $imageName);
+            $data['image'] = 'contents/images/' . $imageName;
         }
 
         // อัพโหลดไฟล์ใหม่
         if ($request->hasFile('file')) {
             // ลบไฟล์เก่า
             if ($content->file_url) {
-                Storage::disk('public')->delete($content->file_url);
+                $oldFilePath = public_path($content->file_url);
+                if (file_exists($oldFilePath)) {
+                    @unlink($oldFilePath);
+                }
             }
-            $filePath = $request->file('file')->store('contents/files', 'public');
-            $data['file_url'] = $filePath;
+            $file = $request->file('file');
+            $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('contents/files'), $fileName);
+            $data['file_url'] = 'contents/files/' . $fileName;
         }
 
         // ลบ keys ที่ไม่ต้องการ update
