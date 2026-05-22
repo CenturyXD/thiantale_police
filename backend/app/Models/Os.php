@@ -21,6 +21,11 @@ class Os extends Model
 
     public function oContents()
     {
-        return $this->hasMany(OContent::class);
+        return $this->hasMany(OContent::class, 'os_id');
+    }
+
+    public function subOContents()
+    {
+        return $this->hasMany(SubOContent::class, 'o_content_id');
     }
 }

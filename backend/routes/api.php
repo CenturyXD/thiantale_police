@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\Admin\TopicController;
 use App\Http\Controllers\Api\Admin\OsController;
 use App\Http\Controllers\Api\Admin\OContentController;
 use App\Http\Controllers\Api\ContentController;
+use App\Http\Controllers\Api\Admin\SubOContentController;
 
 
 /*
@@ -69,6 +70,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::apiResource('topics', TopicController::class);
     Route::apiResource('os', OsController::class);
     Route::apiResource('o-contents', OContentController::class);
+    Route::apiResource('sub-o-contents', SubOContentController::class);
 
     // Content Management
     Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections

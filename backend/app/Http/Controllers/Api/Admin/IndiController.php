@@ -14,8 +14,10 @@ class IndiController extends Controller
      */
     public function index()
     {
+
         $query = Indi::with([
-            'subindis.topics.os.oContents'
+            'subindis.topics.os.oContents',
+            'subindis.topics.os.subOContents',
         ]);
 
         // filter by year if provided
@@ -42,7 +44,7 @@ class IndiController extends Controller
      */
     public function show(Indi $indi)
     {
-        return response()->json($indi->load('subindis.topics.os.oContents'));
+        return response()->json($indi->load('subindis.topics.os.oContents.os.subOContents'));
         //commented out to prevent circular reference in json response
     }
 

@@ -7,19 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class OContent extends Model
 {
     protected $fillable = [
-        'os_id',
-        'title',
-        'content',
-        'section',
-        'image',
-        'file_url',
-        'publish_date',
-        'author_id',
-        'view_count',
-        'order',
+        'name',
         'status',
-        'url',
-        'display_on',
+        'os_id',
     ];
 
     protected $casts = [

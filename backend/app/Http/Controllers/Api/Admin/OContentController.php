@@ -29,15 +29,6 @@ class OContentController extends Controller
     public function store(StoreOContentRequest $request)
     {
         $data = $request->validated();
-        $data['author_id'] = Auth::id();
-
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('o_contents/images', 'public');
-        }
-
-        if ($request->hasFile('file')) {
-            $data['file_url'] = $request->file('file')->store('o_contents/files', 'public');
-        }
 
         $content = OContent::create($data);
 

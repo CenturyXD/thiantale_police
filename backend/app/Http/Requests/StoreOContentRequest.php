@@ -22,17 +22,10 @@ class StoreOContentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required|string|max:255',
+            'status' => 'nullable|string|max:255',
             'os_id' => 'required|exists:os,id',
-            'title' => 'nullable|string|max:255',
-            'content' => 'nullable|string',
-            'section' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'file' => 'nullable|file|max:10240',
-            'status' => 'required|in:draft,published',
-            'publish_date' => 'nullable|date',
-            'order' => 'nullable|integer|min:0',
-            'display_on' => 'nullable|string|max:255',
-            'url' => 'nullable|string|max:255'
+            'created_by' => 'nullable|exists:users,id',
         ];
     }
 
@@ -44,16 +37,9 @@ class StoreOContentRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'name.required' => 'กรุณาระบุชื่อเนื้อหา',
             'os_id.required' => 'กรุณาเลือกหัวข้อย่อย os',
             'os_id.exists' => 'ไม่พบข้อมูล os ที่เลือก',
-            'section.required' => 'กรุณาระบุ section',
-            'status.required' => 'กรุณาเลือกสถานะ',
-            'status.in' => 'สถานะไม่ถูกต้อง',
-            'image.image' => 'ไฟล์ต้องเป็นรูปภาพเท่านั้น',
-            'file.file' => 'ไฟล์แนบไม่ถูกต้อง',
-            'publish_date.date' => 'วันที่เผยแพร่ไม่ถูกต้อง',
-            'order.integer' => 'ลำดับต้องเป็นตัวเลข',
-            'order.min' => 'ลำดับต้องมากกว่าหรือเท่ากับ 0',
         ];
     }
 }
