@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-         Schema::table('sub_o_contents', function (Blueprint $table) {
-            $table->string('url')->nullable()->after('updated_at'); // เพิ่มคอลัมน์ url หลัง updated_at
-         });
+        Schema::table('sub_o_contents', function (Blueprint $table) {
+            $table->renameColumn('o_content_id', 'main_sub_o_content_id');
+        });
     }
 
     /**
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-            Schema::table('sub_o_contents', function (Blueprint $table) {
-                $table->dropColumn('url'); 
-            });
+        Schema::table('sub_o_contents', function (Blueprint $table) {
+            $table->renameColumn('main_sub_o_content_id', 'o_content_id');
+        });
     }
 };
