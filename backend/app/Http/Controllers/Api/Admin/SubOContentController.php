@@ -71,7 +71,7 @@ class SubOContentController extends Controller
 
         $sub_o_content_id = request()->input('sub_o_content_id');
         $subOContents = SubOContent::with(['oContent.os.topic.subIndi'])
-            ->where('o_content_id', $sub_o_content_id)
+            ->where('main_sub_o_content_id', $sub_o_content_id)
             ->latest()
             ->get();
         return response()->json($subOContents);
