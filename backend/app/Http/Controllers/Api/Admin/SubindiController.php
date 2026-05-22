@@ -36,7 +36,6 @@ class SubindiController extends Controller
     {
         return response()->json($subindi->load('indi'));
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -70,5 +69,16 @@ class SubindiController extends Controller
             'success' => true,
             'data' => $subindis
         ]);
+    }
+
+    public function getByIndi()
+    {
+
+        request()->validate([
+            'indi_id' => 'required|exists:indis,id',
+        ]);
+        $indi_id = request()->input('indi_id');
+        $subindis = Subindi::with('indi')->where('indi_id', $indi_id)->latest()->get();
+        return response()->json($subindis);
     }
 }

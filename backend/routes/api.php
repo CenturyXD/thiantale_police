@@ -60,6 +60,7 @@ Route::apiResource('sub-o-contents', SubOContentController::class);
 
 
 
+
 //protected routes (ต้อง login ก่อน)
 Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/test', function () {
@@ -72,6 +73,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::apiResource('os', OsController::class);
     Route::apiResource('o-contents', OContentController::class);
     Route::apiResource('sub-o-contents', SubOContentController::class);
+    Route::post('search/subindis', [SubindiController::class, 'getByIndi']); // Route สำหรับการค้นหาเนื้อหา
 
     // Content Management
     Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
