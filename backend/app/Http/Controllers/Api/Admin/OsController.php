@@ -78,10 +78,10 @@ class OsController extends Controller
     public function getByOsid()
     {
         request()->validate([
-            'Os_id' => 'required|exists:os,id',
+            'Os_id' => 'required',
         ]);
 
-        $os_id = request()->input('os_id');
+        $os_id = request()->input('Os_id');
         $os = Os::with('topic')->where('id', $os_id)->latest()->get();
         return response()->json($os);
     }
