@@ -105,12 +105,13 @@ class OContentController extends Controller
     /**
      * แสดงข้อมูล os ตาม getByOsid
      */
-    public function getByOContentid($o_content_id)
+    public function getByOContentid()
     {
         request()->validate([
             'o_content_id' => 'required|exists:o_contents,id',
         ]);
 
+        $o_content_id = request()->input('o_content_id');
         $oContents = OContent::with(['os', 'author:id,name,email'])
             ->where('id', $o_content_id)
             ->latest()

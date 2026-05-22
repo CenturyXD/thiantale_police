@@ -75,7 +75,7 @@ class OsController extends Controller
     /**
      * แสดงข้อมูล os ตาม getByOsid
      */
-    public function getByOsid($os_id)
+    public function getByOsid()
     {
         request()->validate([
             'Os_id' => 'required|exists:os,id',
