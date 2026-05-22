@@ -75,14 +75,13 @@ class TopicController extends Controller
     /**
      * แสดงข้อมูลตาม subindi_id
      */
-    public function getByTopicid($subindi_id)
+    public function getByTopicid()
     {
         request()->validate([
             'Topic_id' => 'required|exists:topics,id',
         ]);
-
-        $subindi_id = request()->input('subindi_id');
-        $topics = Topic::with('subindi')->where('subindi_id', $subindi_id)->latest()->get();
+        $topic_id = request()->input('Topic_id');
+        $topics = Topic::with(['subindi'])->where('id', $topic_id)->latest()->get();
         return response()->json($topics);
     }
 }
