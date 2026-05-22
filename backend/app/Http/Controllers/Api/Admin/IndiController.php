@@ -45,7 +45,7 @@ class IndiController extends Controller
      */
     public function show(Indi $indi)
     {
-        return response()->json($indi->load('subindis.topics.os.oContents.os.subOContents'));
+        return response()->json($indi->load('subindis.topics.os.oContents.mainOContents.subOContents'));
         //commented out to prevent circular reference in json response
     }
 
