@@ -21,6 +21,7 @@ class AuthController extends Controller
             'phone' => $validated['phone'],
             'email' => $validated['email'],
             'password' => bcrypt($validated['password']),
+            'role' => 'admin', // กำหนด role เป็น admin โดยตรง
         ]);
 
         return response()->json([
