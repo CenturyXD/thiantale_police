@@ -17,7 +17,7 @@ class IndiController extends Controller
 
         $query = Indi::with([
             'subindis.topics.os.oContents',
-            'subindis.topics.os.subOContents',
+            'subindis.topics.os.oContents.subOContents',
         ]);
 
         // filter by year if provided

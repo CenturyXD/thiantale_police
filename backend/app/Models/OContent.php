@@ -27,4 +27,9 @@ class OContent extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+
+    public function subOContents()
+    {
+        return $this->hasMany(SubOContent::class, 'o_content_id');
+    }
 }
