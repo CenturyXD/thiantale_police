@@ -108,12 +108,12 @@ class OContentController extends Controller
     public function getByOContentid()
     {
         request()->validate([
-            'o_content_id' => 'required|exists:o_contents,id',
+            'o_content_id' => 'required',
         ]);
 
         $o_content_id = request()->input('o_content_id');
         $oContents = OContent::with(['os', 'author:id,name,email'])
-            ->where('id', $o_content_id)
+            ->where('os_id', $o_content_id)
             ->latest()
             ->get();
         return response()->json($oContents);
