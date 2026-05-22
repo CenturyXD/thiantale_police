@@ -28,6 +28,11 @@ class ContentController extends Controller
             $query->where('status', $request->status);
         }
 
+        //กรองตาม slot
+        if ($request->has('slot')) {
+            $query->where('slot', $request->slot);
+        }
+
         // ค้นหา
         if ($request->has('search')) {
             $search = $request->search;
