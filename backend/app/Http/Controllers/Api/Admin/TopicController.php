@@ -81,7 +81,7 @@ class TopicController extends Controller
             'Topic_id' => 'required|exists:topics,id',
         ]);
         $topic_id = request()->input('Topic_id');
-        $topics = Topic::with(['subindi'])->where('id', $topic_id)->latest()->get();
+        $topics = Topic::with(['subindi'])->where('subindi_id', $topic_id)->latest()->get();
         return response()->json($topics);
     }
 }
