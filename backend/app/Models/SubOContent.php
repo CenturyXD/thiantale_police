@@ -22,6 +22,7 @@ class SubOContent extends Model
         'created_at',
         'author_id',
         'updated_at',
+        'url',
     ];
 
     public function oContent()
