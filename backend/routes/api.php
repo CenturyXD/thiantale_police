@@ -58,6 +58,11 @@ Route::apiResource('os', OsController::class);
 Route::apiResource('o-contents', OContentController::class);
 Route::apiResource('sub-o-contents', SubOContentController::class);
 
+Route::post('search/subindis', [SubindiController::class, 'getByIndi']);
+Route::post('search/topics', [TopicController::class, 'getByTopicid']);
+Route::post('search/os', [OsController::class, 'getByOsid']);
+Route::post('search/o-contents', [OContentController::class, 'getByOsid']);
+Route::post('search/sub-o-contents', [SubOContentController::class, 'getByOContentid']);
 
 
 
@@ -73,7 +78,13 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::apiResource('os', OsController::class);
     Route::apiResource('o-contents', OContentController::class);
     Route::apiResource('sub-o-contents', SubOContentController::class);
-    Route::post('search/subindis', [SubindiController::class, 'getByIndi']); // Route สำหรับการค้นหาเนื้อหา
+    //search by id
+    Route::post('search/subindis', [SubindiController::class, 'getByIndi']);
+    Route::post('search/topics', [TopicController::class, 'getByTopicid']);
+    Route::post('search/os', [OsController::class, 'getByOsid']);
+    Route::post('search/o-contents', [OContentController::class, 'getByOContentid']);
+    Route::post('search/sub-o-contents', [SubOContentController::class, 'getBySubOContentid']);
+
 
     // Content Management
     Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections

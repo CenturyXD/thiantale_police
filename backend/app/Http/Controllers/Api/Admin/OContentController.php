@@ -101,4 +101,20 @@ class OContentController extends Controller
             'message' => 'ลบเนื้อหาสำเร็จ',
         ]);
     }
+
+    /**
+     * แสดงข้อมูล os ตาม getByOsid
+     */
+    public function getByOContentid($o_content_id)
+    {
+        request()->validate([
+            'o_content_id' => 'required|exists:o_contents,id',
+        ]);
+
+        $oContents = OContent::with(['os', 'author:id,name,email'])
+            ->where('id', $o_content_id)
+            ->latest()
+            ->get();
+        return response()->json($oContents);
+    }
 }

@@ -71,4 +71,19 @@ class OsController extends Controller
             'data' => $os
         ]);
     }
+
+    /**
+     * แสดงข้อมูล os ตาม getByOsid
+     */
+    public function getByOsid($os_id)
+    {
+        request()->validate([
+            'Os_id' => 'required|exists:os,id',
+        ]);
+
+        $os_id = request()->input('os_id');
+        $os = Os::with('topic')->where('id', $os_id)->latest()->get();
+        return response()->json($os);
+    }
+
 }

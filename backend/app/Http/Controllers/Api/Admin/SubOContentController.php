@@ -62,4 +62,18 @@ class SubOContentController extends Controller
         $subOContent->delete();
         return response()->json(null, 204);
     }
+
+    public function getBySubOContentid($sub_o_content_id)
+    {
+        request()->validate([
+            'sub_o_content_id' => 'required|exists:sub_o_contents,id',
+        ]);
+
+        $subOContents = SubOContent::with(['oContent.os.topic.subIndi'])
+            ->where('id', $sub_o_content_id)
+            ->latest()
+            ->get();
+        return response()->json($subOContents);
+
+    }
 }
