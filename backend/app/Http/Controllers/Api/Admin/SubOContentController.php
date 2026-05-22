@@ -66,12 +66,12 @@ class SubOContentController extends Controller
     public function getBySubOContentid()
     {
         request()->validate([
-            'sub_o_content_id' => 'required|exists:sub_o_contents,id',
+            'sub_o_content_id' => 'required',
         ]);
 
         $sub_o_content_id = request()->input('sub_o_content_id');
         $subOContents = SubOContent::with(['oContent.os.topic.subIndi'])
-            ->where('id', $sub_o_content_id)
+            ->where('o_content_id', $sub_o_content_id)
             ->latest()
             ->get();
         return response()->json($subOContents);
