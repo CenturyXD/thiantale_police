@@ -34,6 +34,7 @@ class UpdateOContentRequest extends FormRequest
             'remove_image' => 'nullable|boolean',
             'remove_file' => 'nullable|boolean',
             'display_on' => 'nullable|string|max:255',
+            'url' => 'nullable|string|max:255'
         ];
     }
 
