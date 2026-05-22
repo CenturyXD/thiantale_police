@@ -56,6 +56,7 @@ Route::apiResource('subindis', SubindiController::class);
 Route::apiResource('topics', TopicController::class);
 Route::apiResource('os', OsController::class);
 Route::apiResource('o-contents', OContentController::class);
+Route::apiResource('sub-o-contents', SubOContentController::class);
 
 
 
