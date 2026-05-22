@@ -86,6 +86,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::post('search/topics', [TopicController::class, 'getByTopicid']);
     Route::post('search/os', [OsController::class, 'getByOsid']);
     Route::post('search/o-contents', [OContentController::class, 'getByOContentid']);
+    Route::post('search/main-o-contents', [MainOContentController::class, 'getByOContentid']);
     Route::post('search/sub-o-contents', [SubOContentController::class, 'getBySubOContentid']);
 
 
