@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('sub_o_contents', function (Blueprint $table) {
-            $table->renameColumn('o_content_id', 'main_sub_o_content_id');
+        Schema::create('slot', function (Blueprint $table) {
+            $table->id();
+            $table->string('sec_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('type')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('sub_o_contents', function (Blueprint $table) {
-            $table->renameColumn('main_sub_o_content_id', 'o_content_id');
-        });
+        Schema::dropIfExists('slot');
     }
 };

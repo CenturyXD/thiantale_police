@@ -25,7 +25,6 @@ class StoreContentRequest extends FormRequest
         return [
             'title' => 'nullable|string|max:255',
             'content' => 'nullable|string',
-            // 'section' => 'required|in:' . implode(',', array_keys(Content::SECTIONS)),
             'section' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
             'body_images' => 'nullable|array',

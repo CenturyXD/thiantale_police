@@ -12,6 +12,8 @@ use App\Http\Controllers\Api\Admin\OContentController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\Admin\SubOContentController;
 use App\Http\Controllers\Api\Admin\MainOContentController;
+use App\Http\Controllers\Api\Admin\SectionController;
+use App\Http\Controllers\Api\Admin\SlotController;
 
 
 /*
@@ -59,6 +61,8 @@ Route::apiResource('os', OsController::class);
 Route::apiResource('o-contents', OContentController::class);
 Route::apiResource('main-o-contents', MainOContentController::class);
 Route::apiResource('sub-o-contents', SubOContentController::class);
+Route::apiResource('sections', SectionController::class);
+Route::apiResource('slots', SlotController::class);
 
 Route::post('search/subindis', [SubindiController::class, 'getByIndi']);
 Route::post('search/topics', [TopicController::class, 'getByTopicid']);
@@ -81,6 +85,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::apiResource('o-contents', OContentController::class);
     Route::apiResource('main-o-contents', MainOContentController::class);
     Route::apiResource('sub-o-contents', SubOContentController::class);
+    Route::apiResource('sections', SectionController::class);
+    Route::apiResource('slots', SlotController::class);
     //search by id
     Route::post('search/subindis', [SubindiController::class, 'getByIndi']);
     Route::post('search/topics', [TopicController::class, 'getByTopicid']);
