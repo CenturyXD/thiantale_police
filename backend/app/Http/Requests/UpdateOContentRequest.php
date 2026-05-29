@@ -22,6 +22,7 @@ class UpdateOContentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'nullable|string|max:255',
             'os_id' => 'sometimes|required|exists:os,id',
             'title' => 'nullable|string|max:255',
             'content' => 'nullable|string',
