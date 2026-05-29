@@ -28,7 +28,7 @@ class UpdateOContentRequest extends FormRequest
             'section' => 'sometimes|required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'file' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:10240',
-            'status' => 'sometimes|required|in:draft,published',
+            'status' => 'sometimes|required',
             'publish_date' => 'nullable|date',
             'order' => 'nullable|integer|min:0',
             'remove_image' => 'nullable|boolean',
