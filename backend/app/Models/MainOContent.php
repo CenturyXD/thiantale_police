@@ -15,6 +15,7 @@ class MainOContent extends Model
         'name',
         'status',
         'o_content_id',
+        'type',
     ];
 
     public function os()
