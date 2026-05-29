@@ -26,6 +26,7 @@ class UpdateMainOContentRequest extends FormRequest
             'o_content_id' => 'required|exists:o_contents,id',
             'name' => 'required|string|max:255',
             'status' => 'nullable|string|max:255',
+            'type' => 'nullable|string|max:255',
         ];
     }
 }
