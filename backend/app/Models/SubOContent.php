@@ -10,7 +10,7 @@ class SubOContent extends Model
 
     protected $table = 'sub_o_contents';
     protected $fillable = [
-        'main_sub_o_content_id',
+        'o_content_id',
         'title',
         'content',
         'section',
@@ -39,5 +39,4 @@ class SubOContent extends Model
     {
         return $this->hasMany(MainOContent::class, 'main_o_contents_id');
     }
-
 }
