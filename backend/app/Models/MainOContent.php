@@ -29,6 +29,6 @@ class MainOContent extends Model
     }
     public function subOContents()
     {
-        return $this->hasMany(SubOContent::class, 'o_content_id', 'o_content_id');
+        return $this->hasMany(SubOContent::class, 'main_sub_o_content_id');
     }
 }

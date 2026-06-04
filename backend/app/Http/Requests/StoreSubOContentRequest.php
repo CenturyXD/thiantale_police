@@ -23,7 +23,7 @@ class StoreSubOContentRequest extends FormRequest
     {
         return [
             //
-            'o_content_id' => 'required|exists:o_contents,id',
+            'main_sub_o_content_id' => 'required|exists:main_o_contents,id',
             'title' => 'nullable|string|max:255',
             'section' => 'sometimes|nullable|string|max:255',
             'content' => 'nullable|string',
