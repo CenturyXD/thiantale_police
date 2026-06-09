@@ -79,7 +79,7 @@ Route::apiResource('admin/main-o-contents', MainOContentController::class);
 Route::apiResource('admin/sub-o-contents', SubOContentController::class);
 Route::apiResource('admin/sections', SectionController::class);
 Route::apiResource('admin/slots', SlotController::class);
-    //search by id
+//search by id
 Route::post('admin/search/subindis', [SubindiController::class, 'getByIndi']);
 Route::post('admin/search/topics', [TopicController::class, 'getByTopicid']);
 Route::post('admin/search/os', [OsController::class, 'getByOsid']);
@@ -87,41 +87,45 @@ Route::post('admin/search/o-contents', [OContentController::class, 'getByOConten
 Route::post('admin/search/main-o-contents', [MainOContentController::class, 'getByOContentid']);
 Route::post('admin/search/sub-o-contents', [SubOContentController::class, 'getBySubOContentid']);
 
-
-    // Content Management
-Route::get('admin/contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
-Route::post('admin/contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
-Route::delete('admin/contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
-Route::apiResource('admin/contents', AdminContentController::class);
+// Route::get('admin/contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
+// Route::post('admin/contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
+// Route::delete('admin/contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
+// Route::apiResource('admin/contents', AdminContentController::class);
 
 
 //protected routes (ต้อง login ก่อน)
-// Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
-//     Route::get('/test', function () {
-//         return response()->json(['message' => 'Admin test route']);
-//     });
+Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/test', function () {
+        return response()->json(['message' => 'Admin test route']);
+    });
 
-//     Route::apiResource('indis', IndiController::class);
-//     Route::apiResource('subindis', SubindiController::class);
-//     Route::apiResource('topics', TopicController::class);
-//     Route::apiResource('os', OsController::class);
-//     Route::apiResource('o-contents', OContentController::class);
-//     Route::apiResource('main-o-contents', MainOContentController::class);
-//     Route::apiResource('sub-o-contents', SubOContentController::class);
-//     Route::apiResource('sections', SectionController::class);
-//     Route::apiResource('slots', SlotController::class);
-//     //search by id
-//     Route::post('search/subindis', [SubindiController::class, 'getByIndi']);
-//     Route::post('search/topics', [TopicController::class, 'getByTopicid']);
-//     Route::post('search/os', [OsController::class, 'getByOsid']);
-//     Route::post('search/o-contents', [OContentController::class, 'getByOContentid']);
-//     Route::post('search/main-o-contents', [MainOContentController::class, 'getByOContentid']);
-//     Route::post('search/sub-o-contents', [SubOContentController::class, 'getBySubOContentid']);
+    // Content Management
+    Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
+    Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
+    Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
+    Route::apiResource('contents', AdminContentController::class);
+
+    // Route::apiResource('indis', IndiController::class);
+    // Route::apiResource('subindis', SubindiController::class);
+    // Route::apiResource('topics', TopicController::class);
+    // Route::apiResource('os', OsController::class);
+    // Route::apiResource('o-contents', OContentController::class);
+    // Route::apiResource('main-o-contents', MainOContentController::class);
+    // Route::apiResource('sub-o-contents', SubOContentController::class);
+    // Route::apiResource('sections', SectionController::class);
+    // Route::apiResource('slots', SlotController::class);
+    // //search by id
+    // Route::post('search/subindis', [SubindiController::class, 'getByIndi']);
+    // Route::post('search/topics', [TopicController::class, 'getByTopicid']);
+    // Route::post('search/os', [OsController::class, 'getByOsid']);
+    // Route::post('search/o-contents', [OContentController::class, 'getByOContentid']);
+    // Route::post('search/main-o-contents', [MainOContentController::class, 'getByOContentid']);
+    // Route::post('search/sub-o-contents', [SubOContentController::class, 'getBySubOContentid']);
 
 
-//     // Content Management
-//     Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
-//     Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
-//     Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
-//     Route::apiResource('contents', AdminContentController::class);
-// });
+    // Content Management
+    // Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
+    // Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
+    // Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
+    // Route::apiResource('contents', AdminContentController::class);
+});
