@@ -27,7 +27,7 @@ class SubOContentController extends Controller
     {
         //
         $data = $request->validated();
-        $data['author_id'] = auth()->id();
+        $data['author_id'] = '1';
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');

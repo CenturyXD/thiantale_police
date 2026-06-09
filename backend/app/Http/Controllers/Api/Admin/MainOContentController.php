@@ -27,7 +27,7 @@ class MainOContentController extends Controller
     {
         //
         $data = $request->validated();
-        $data['author_id'] = auth()->id();
+        $data['author_id'] = '1';
         $mainOContent = MainOContent::create($data);
         return response()->json($mainOContent->load(['oContent.os.topic.subIndi']), 201);
     }

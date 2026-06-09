@@ -60,7 +60,7 @@ class ContentController extends Controller
     public function store(StoreContentRequest $request)
     {
         $data = $request->validated();
-        $data['author_id'] = auth()->id();
+        $data['author_id'] = '1';
 
         // อัพโหลดรูปภาพไปที่ public/contents/images
         if ($request->hasFile('image')) {
