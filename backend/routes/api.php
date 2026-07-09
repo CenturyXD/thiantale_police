@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\Admin\SubOContentController;
 use App\Http\Controllers\Api\Admin\MainOContentController;
 use App\Http\Controllers\Api\Admin\SectionController;
 use App\Http\Controllers\Api\Admin\SlotController;
-
+use App\Http\Controllers\Api\Admin\FacebookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,7 +92,7 @@ Route::post('admin/search/sub-o-contents', [SubOContentController::class, 'getBy
 // Route::delete('admin/contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
 // Route::apiResource('admin/contents', AdminContentController::class);
 
-
+Route::apiResource('facebook', FacebookController::class);
 //protected routes (ต้อง login ก่อน)
 Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/test', function () {
@@ -104,6 +104,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
     Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
     Route::apiResource('contents', AdminContentController::class);
+
+    // Facebook Management
+    
 
     // Route::apiResource('indis', IndiController::class);
     // Route::apiResource('subindis', SubindiController::class);
