@@ -93,6 +93,14 @@ Route::post('admin/search/sub-o-contents', [SubOContentController::class, 'getBy
 // Route::apiResource('admin/contents', AdminContentController::class);
 
 Route::apiResource('facebook', FacebookController::class);
+
+Route::prefix('news')->middleware(['auth:sanctum', 'news'])->group(function () {
+    Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
+    Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
+    Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
+    Route::apiResource('contents', AdminContentController::class);
+});
+
 //protected routes (ต้อง login ก่อน)
 Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/test', function () {
