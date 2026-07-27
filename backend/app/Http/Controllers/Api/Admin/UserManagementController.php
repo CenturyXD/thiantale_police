@@ -92,6 +92,7 @@ class UserManagementController extends Controller
                 'email' => ['sometimes', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
                 'phone' => 'sometimes|nullable|string|max:255',
                 'password' => 'sometimes|string|min:8|confirmed',
+                'role' => ['sometimes'],
                 'status' => ['sometimes', Rule::in(['active', 'deactive'])],
             ]);
 
