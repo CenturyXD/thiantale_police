@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Admin\MainOContentController;
 use App\Http\Controllers\Api\Admin\SectionController;
 use App\Http\Controllers\Api\Admin\SlotController;
 use App\Http\Controllers\Api\Admin\FacebookController;
+use App\Http\Controllers\Api\Admin\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,15 +95,8 @@ Route::post('admin/search/sub-o-contents', [SubOContentController::class, 'getBy
 
 Route::apiResource('facebook', FacebookController::class);
 
-Route::prefix('news')->middleware(['auth:sanctum', 'news'])->group(function () {
-    Route::get('contents/sections', [AdminContentController::class, 'getSections']); // ดูรายการ sections
-    Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
-    Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
-    Route::apiResource('contents', AdminContentController::class);
-});
-
 //protected routes (ต้อง login ก่อน)
-Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth:sanctum', 'active'])->group(function () {
     Route::get('/test', function () {
         return response()->json(['message' => 'Admin test route']);
     });
@@ -112,6 +106,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function ()
     Route::post('contents/editor-image', [AdminContentController::class, 'uploadEditorImage']);
     Route::delete('contents/{content}/images/{contentImage}', [AdminContentController::class, 'destroyEditorImage']);
     Route::apiResource('contents', AdminContentController::class);
+
+    // User Management
+    Route::apiResource('users', UserManagementController::class);
 
     // Facebook Management
     

@@ -17,8 +17,7 @@ class UserManagementController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->query('per_page', 5);
-
+        $perPage = $request->query('per_page', 15);
         $searchTerm = $request->query('search');
 
         $query = User::where('id', '!=', auth()->id());
@@ -27,9 +26,13 @@ class UserManagementController extends Controller
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', "%{$searchTerm}%")
                     ->orWhere('username', 'like', "%{$searchTerm}%")
-                    ->orWhere('role', 'like', "%{$searchTerm}%")
+                    ->orWhere('email', 'like', "%{$searchTerm}%")
                     ->orWhere('status', 'like', "%{$searchTerm}%");
             });
+        }
+
+        if ($request->has('status')) {
+            $query->where('status', $request->query('status'));
         }
 
         $users = $query->latest()->paginate($perPage)->withQueryString();
@@ -46,20 +49,24 @@ class UserManagementController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
+            'phone' => 'nullable|string|max:255',
             'password' => 'required|string|min:8|confirmed',
-            'role' => ['required', Rule::in(['admin', 'user'])], // จำกัด role ที่สร้างได้
+            'status' => ['nullable', Rule::in(['active', 'deactive'])],
         ]);
 
         $user = User::create([
             'name' => $validatedData['name'],
             'username' => $validatedData['username'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'] ?? null,
             'password' => Hash::make($validatedData['password']),
-            'role' => $validatedData['role'],
+            'status' => $validatedData['status'] ?? 'active',
         ]);
 
         return response()->json([
             'message' => 'User created successfully.',
-            'user' => $user
+            'user' => $user,
         ], 201);
     }
 
@@ -80,28 +87,33 @@ class UserManagementController extends Controller
     {
         try {
             $validatedData = $request->validate([
+                'name' => 'sometimes|string|max:255',
+                'username' => ['sometimes', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'email' => ['sometimes', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+                'phone' => 'sometimes|nullable|string|max:255',
+                'password' => 'sometimes|string|min:8|confirmed',
                 'status' => ['sometimes', Rule::in(['active', 'deactive'])],
             ]);
 
-            if (isset($validatedData['status'])) {
-                $user->status = $validatedData['status'];
+            if (isset($validatedData['password'])) {
+                $validatedData['password'] = Hash::make($validatedData['password']);
             }
 
-            $user->save();
+            $user->update($validatedData);
 
             return response()->json([
                 'message' => 'User updated successfully.',
-                'user' => $user
+                'user' => $user->fresh(),
             ]);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'Validation error.',
-                'errors' => $e->errors()
+                'errors' => $e->errors(),
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'An error occurred.',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -112,9 +124,8 @@ class UserManagementController extends Controller
      */
     public function destroy(User $user)
     {
-        // ป้องกันการลบ superadmin คนอื่น (ถ้ามี) หรือลบตัวเอง
-        if ($user->role === 'superadmin' || $user->id === auth()->id()) {
-            return response()->json(['message' => 'Action not allowed.'], 403);
+        if ($user->id === auth()->id()) {
+            return response()->json(['message' => 'Cannot delete your own account.'], 403);
         }
 
         $user->delete();
